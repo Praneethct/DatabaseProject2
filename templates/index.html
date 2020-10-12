@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Query</title>
+    </head>
+    <body>
+        <form action="/execute" method="post">
+            <input type="radio" name="dbType" id="rds", value = "rds">
+
+            <label for="rds">RDS</label>
+
+            <input type="radio" name="dbType" id="redshift", value = "redshift">
+
+            <label for="redshift">RedShift</label>
+
+            <textarea id="query" name="query">
+
+            </textarea>
+
+            <!-- <input type="text" id="dbType" name="dbType"> -->
+
+            <input type="submit" value="Execute Query">
+
+        </form>
+        {% if tableHeaders and results %}
+            <table>
+                <tr>
+                    {% for tableHeader in tableHeaders %}
+                        <td>{{ tableHeader }}</td>   
+                    {% endfor %}
+                </tr>
+                {% for row in results %}
+                    <tr>
+                    {% for col in row %}
+                        <td> {{ col }} </td>    
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </body>
+
