@@ -1,43 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Query</title>
-    </head>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>CS527 Fall 2020 - Group 7 - Project 1</title>
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+    <meta name = "description" content = "CS527 Project 1">
+
+    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+  
+    <style>
+        body {
+            background-image: linear-gradient(to bottom, #dee8ff, white);
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        table.paleblue {
+            padding: 12px 20px;
+            font-weight: 200;
+        }
+
+        table.paleblue th, table.paleblue td {
+            border: 2px solid #D0E4F5;
+            padding: 12px 20px;
+            font-weight: bold;
+        }
+
+        table.paleBlueRows tr:nth-child(even) {
+            background: #D0E4F5;
+        }
+
+        table.paleBlueRows thead {
+            background: #599CD4;
+            border-bottom: 5px solid #FFFFFF;
+        }
+
+        table.paleBlueRows thead th {
+            font-size: 13px;
+            font-weight: bold;
+            color: #FFFFFF;
+            text-align: left;
+        }
+
+        .textstuff {
+            padding: 15px;
+        }
+
+        textarea {
+            font-size: x-large;
+            text-align: left;
+        }
+
+        .footer {
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<script>
+    window.onload = function () {
+    var loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart; 
+    console.log('Page load time is '+ loadTime);
+    }
+    document.getElementById("myText").innerHTML = loadTime;
+</script>
+
     <body>
+        
+        <h1 style="text-align: center;">CS527 Fall 2020 - Group 7 - Project 1</h1>
+        <h3 style="text-align: center;">Team Members: Arwa EL-Hawwat, Lance Luo, Praneeth, Chaitanya Vallabhaneni, Radhika Dube</h3>
+
+        <hr>
+        
         <form action="/execute" method="post">
-            <input type="radio" name="dbType" id="rds", value = "rds">
 
-            <label for="rds">RDS</label>
+            <div class="textstuff" style="float: right;"></div>
 
-            <input type="radio" name="dbType" id="redshift", value = "redshift">
+                <div class="textstuff" style="float: right;">
+                    
+                    <br>    
+                    <h2>Please Choose A Database Type: </h2>
+                    
+                    <div id="database type">
+                        <input type="radio" name="dbType" id="rds", value = "rds" checked>
+                        <label for="rds">MySQL</label>
+    
+                        <input type="radio" name="dbType" id="redshift", value = "redshift">
+                        <label for="redshift">RedShift</label>
+                    </div>
 
-            <label for="redshift">RedShift</label>
+                    <h2>Please Choose A Database: </h2>
 
-            <textarea id="query" name="query">
+                    <div id="database">
+                        <input type="radio" name="db" id="instacart", value = "instacart" checked>
+                        <label for="instacart">Instacart</label>
 
-            </textarea>
+                        <input type="radio" name="db" id="abc-retail", value = "abc-retail">
+                        <label for="abc-retail">ABC-Retail</label>
+                    </div>
+
+                    <h2>Database ER Diagrams: </h2>
+
+                    <div class="textstuff">
+                        <a href="https://drive.google.com/file/d/1SXrWHAJhJ2nFziYHWi7AbG-N-EbXqB2j/view?usp=sharing" target="_blank">Instacart ERD</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="https://drive.google.com/file/d/1oZ2l8tHf2D8uLzWdY7ePahBAu_Gt7ZDS/view?usp=sharing" target="_blank">ABC-Retail ERD</a>
+                    </div> 
+                    
+                </div>
+
+            </div>
+
+            <div class="textstuff">
+                <h2>
+                    Input SQL Query Here:
+                </h2>
+                
+                <td class="auto-style1">
+                    <textarea name="query" rows="2" cols="20" id="query" style="text-align: left;font-size:X-Large;height:280px;width:800px;">
+                    </textarea>
+                </td>
+            </div>
 
             <!-- <input type="text" id="dbType" name="dbType"> -->
 
-            <input type="submit" value="Execute Query">
-
+            <div style="width=300px; float:left; padding: 15px;">
+                <input type="submit" name="Button1" value="Execute Query" style="color:#7332a8;font-size:Large;height:50px;width:221px;">
+                <input type="reset" name="Button4" value="Reset" style="color:#7332a8;font-size:Large;height:50px;width:221px;">
+            </div>
+            
         </form>
-        {% if tableHeaders and results %}
-            <table>
-                <tr>
-                    {% for tableHeader in tableHeaders %}
-                        <td>{{ tableHeader }}</td>   
-                    {% endfor %}
-                </tr>
-                {% for row in results %}
-                    <tr>
-                    {% for col in row %}
-                        <td> {{ col }} </td>    
-                    {% endfor %}
+
+        <div style="float:center; padding: 30px">
+            Time elapsed:
+            <td class="auto-style4">
+                <textarea name="TextBox3" rows="1" cols="5" style="width: 100px;" readonly="true"><!-- <span id="myText"></span> --></textarea>
+            </td>
+            <!-- <span id="myText"></span> -->
+        </div>    
+
+        <div  class="textstuff" style="overflow-x:auto;">
+            <h2>
+                Query Result:
+            </h2>
+
+            {% if tableHeaders and results %}
+
+                <table class="paleblue">
+                    <tr style="background: #599CD4; color: #FFFFFF;">
+                        {% for tableHeader in tableHeaders %}
+                            <td>{{ tableHeader }}</td>   
+                        {% endfor %}
                     </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
+                    {% for row in results %}
+                        <tr>
+                        {% for col in row %}
+                            <td> {{ col }} </td>    
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+                
+            {% endif %}
+        </div>
+        <br><br><br>
+
+        <div class="textstuff">
+            <h2>Thanks for visiting!!</h2>
+        </div>
+
+    <br><br><br><br>
+
     </body>
 
