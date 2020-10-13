@@ -12,7 +12,7 @@ def mainPage():
 def execute():
     print((request.form["dbType"], request.form["query"]))
     query = request.form["query"].strip().strip('\n').strip('\r').strip('\r\n')
-    tableHeaders, results, timeElapsed = executeQuery(query, request.form["dbType"])
+    tableHeaders, results, timeElapsed = executeQuery(query, request.form["dbType"], request.form["dbName"])
     print(tableHeaders, results)
     return render_template("index.html", tableHeaders=tableHeaders, results=results, timeElapsed=timeElapsed)
 
