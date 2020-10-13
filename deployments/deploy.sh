@@ -20,6 +20,6 @@ install_docker() {
 docker rm -f databaseproject
 [ -d "/home/ec2-user/DataBaseProject" ] || clone_repo
 cd /home/ec2-user/DataBaseProject && git pull origin
-[ docker -v ] || install_docker
+[[ `docker -v` ]] || install_docker
 docker build -t databaseflaskapp app
 docker run --name databaseproject -p 80:80 -d databaseflaskapp
