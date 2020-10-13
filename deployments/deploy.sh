@@ -5,6 +5,7 @@ clone_repo() {
     echo -n "Enter Github Password: "
     read -s password
     echo 
+    cd /home/ec2-user
     git clone https://$username:$password@github.com/Praneethct/DataBaseProject.git
 }
 
@@ -17,7 +18,8 @@ install_docker() {
 
 
 docker rm -f databaseproject
-[ -d "DataBaseProject" ] ||clone_repo
+[ -d "/home/ec2-user/DataBaseProject" ] || clone_repo
+cd /home/ec2-user/DataBaseProject && git pull origin
 [ docker -v ] || install_docker
 docker build -t databaseflaskapp ../app
 docker run --name databaseproject -p 80:80 -d databaseflaskapp
