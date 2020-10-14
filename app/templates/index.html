@@ -59,12 +59,16 @@
 
 </head>
 
-<script>
+<script language = "javascript" type = "text/javascript">
     window.onload = function () {
-    var loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart; 
-    console.log('Page load time is '+ loadTime);
+        var loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart; 
+        console.log('Page load time is '+ loadTime);
     }
     document.getElementById("myText").innerHTML = loadTime;
+
+    function white_space(field){
+        return field.split(' ').join('');
+    }
 </script>
 
     <body>
@@ -119,8 +123,7 @@
                 </h2>
                 
                 <td class="auto-style1">
-                    <textarea name="query" rows="2" cols="20" id="query" style="text-align: left;font-size:X-Large;height:280px;width:800px;">
-                    </textarea>
+                    <textarea name="query" rows="2" cols="20" id="query" style="text-align: left;font-size:X-Large;height:250px;width: 63%;" onclick="white_space(this)"></textarea>
                 </td>
             </div>
 
@@ -133,15 +136,18 @@
             
         </form>
 
-        <div style="float:center; padding: 30px">
-            Time elapsed:
+        <div style="float:center; padding: 30px white-space: nowrap; justify-content: space-between; padding-top: 10px;">
+            <h3>Time elapsed: {{timeElapsed}} sec</h3>
             <td class="auto-style4">
-                <textarea name="TextBox3" rows="1" cols="5" style="width: 300px;" readonly="true">{{timeElapsed}} sec</textarea>
+                <!-- <textarea name="TextBox3" rows="1" cols="5" style="width: 300px;" readonly="true">{{timeElapsed}} sec</textarea> -->
             </td>
             <!-- <span id="myText"></span> -->
-        </div>    
+        </div>
+        <div style="visibility: hidden;">    
+            This is some secret text!! Can you find it??
+        </div>
 
-        <div  class="textstuff" style="overflow-x:auto;">
+        <div  class="textstuff" style="overflow-x:auto; float: inline-start;">
             <h2>
                 Query Result:
             </h2>
