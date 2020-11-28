@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>CS527 Fall 2020 - Group 7 - Project 1</title>
+    <title>CS527 Fall 2020 - Group 7 - Project 2</title>
     <meta name = "viewport" content = "width = device-width, initial-scale = 1">
     <meta name = "description" content = "CS527 Project 1">
 
@@ -63,12 +63,16 @@
     window.onload = function () {
         var loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart; 
         console.log('Page load time is '+ loadTime);
+        // document.getElementById("myText").innerHTML = loadTime;
     }
-    document.getElementById("myText").innerHTML = loadTime;
 
     function white_space(field){
         return field.split(' ').join('');
     }
+
+    setTimeout(function(){
+        window.location.reload(1);
+    }, 5000);
 </script>
 
     <body>
