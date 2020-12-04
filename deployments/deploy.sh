@@ -17,7 +17,7 @@ install_docker() {
 }
 
 
-docker rm -f databaseproject
+docker rm -f databaseproject2
 [ -d "/home/ec2-user/DatabaseProject2" ] || clone_repo
 cd /home/ec2-user/DataBaseProject2 && git pull origin
 [[ `docker -v` ]] || install_docker
