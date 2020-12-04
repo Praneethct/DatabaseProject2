@@ -19,7 +19,7 @@ install_docker() {
 
 docker rm -f databaseproject2 || echo "container not found"
 [ -d "/home/ec2-user/DatabaseProject2" ] || clone_repo
-cd /home/ec2-user/DataBaseProject2 && git pull origin
+cd /home/ec2-user/DatabaseProject2 && git pull origin
 [[ `docker -v` ]] || install_docker
 docker build -t databaseflaskapp2 app
 docker run --name databaseproject2 -p 80:80 -d databaseflaskapp2
