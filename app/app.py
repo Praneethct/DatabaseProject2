@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 from dbconnection import executeQuery
 import requests
+import sys
 
 app = Flask(__name__)
 query = ""
@@ -32,8 +33,8 @@ def updateQuery():
     data = request.get_json()
     query = data['query']
     database = data['database']
-    print("[INFO]\t\t=====Database : ", database)
-    print("[INFO]\t\t=====Query : ", query)
+    print("[INFO]\t\t=====Database : ", database, file=sys.stderr)
+    print("[INFO]\t\t=====Query : ", query, file=sys.stderr)
     return {"status": True}
 
     
