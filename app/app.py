@@ -32,7 +32,8 @@ def updateQuery():
     data = request.get_json()
     query = data['query']
     database = data['database']
-
+    print("[INFO]\t\t=====Database : ", database)
+    print("[INFO]\t\t=====Query : ", query)
     return {"status": True}
 
     
