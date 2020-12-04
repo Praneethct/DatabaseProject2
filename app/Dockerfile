@@ -1,5 +1,7 @@
 FROM python:3.7
 
+
+ENV FLASK_DEBUG 1
 WORKDIR /home/flask_app
 
 ADD . .
