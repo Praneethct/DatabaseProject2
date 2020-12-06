@@ -107,7 +107,9 @@ class QueryParser():
         mappings = {
                 "columnSpecialCharacters": {
                     "all": "*",
-                    "star": "*"
+                    "star": "*",
+                    "ascending": "",
+                    "descending": ""
                 },
 
                 "connectingCharacters": {
@@ -158,13 +160,22 @@ class QueryParser():
         columnType = set(["select", "group by", "order by"])
         
         for item in parsed_items:
-            cleanedItem = parsed_items[item].strip().split(" ")
+            cleanedItem = parsed_items[item].strip().split(" ") 
             cleanedItem = self.handleConnectingCharacters(cleanedItem, self.getMappings("connectingCharacters"))
             
             if item in columnType:
+                extra = ""
+                if item == "order by":
+                    if "ascending" in cleanedItem:
+                        extra = "ASC"
+                    elif "descending" in cleanedItem:
+                        extra = "DESC"
+
                 cleanedItem = self.handleSpecialCharacters(cleanedItem, self.getMappings("columnSpecialCharacters"))
                 cleanedItem = self.handleFunctions(cleanedItem)
-                parsed_items[item] = ','.join(cleanedItem)
+                cleanedItem = list(filter(lambda x: x != '', cleanedItem))
+                parsed_items[item] = ','.join(cleanedItem) + " " + extra
+                parsed_items[item] = parsed_items[item].strip()
             
             else:
                 cleanedItem = self.handleSpecialCharacters(cleanedItem, self.getMappings("conditionSpecialCharacters"))
@@ -255,12 +266,12 @@ class QueryParser():
 
 
 
-# QueryParser = QueryParser()
+# parser = QueryParser.getInstance()
 # query = input("enter the query: ")
 # database = input("enter the database: ")
 # slots = {"query": query.lower().strip(), "database": database.lower().strip()}
 # handler_input = {"slots": slots}
-# QueryParser.handle(handler_input)
+# parser.handle(query)
 
 
 
