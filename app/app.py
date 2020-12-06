@@ -1,42 +1,25 @@
 from flask import Flask, request, render_template
 from dbconnection import executeQuery
-import requests
-import sys
+from QueryParser import QueryParser
+
 
 app = Flask(__name__)
-query = ""
-database = ""
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/")
 def mainPage():
+    return render_template("index.html")
 
-    global query
-    global database
-
-
-    if not query:
+@app.route("/execute", methods=["POST", "GET"])
+def execute():
+    print((request.form["dbType"], request.form["query"]))
+    query = request.form["query"].strip().strip('\n').strip('\r').strip('\r\n')
+    parser = QueryParser.getInstance()
+    try:
+        tableHeaders, results, timeElapsed = executeQuery(parser.handle(query), request.form["dbType"], request.form["dbName"])
+    except:
         return render_template("index.html")
-
-    # print((request.form["dbType"], query))
-    cleanedQuery = query.strip().strip('\n').strip('\r').strip('\r\n')
-    tableHeaders, results, timeElapsed = executeQuery(cleanedQuery, "rds", database)
-    # print(tableHeaders, results)
+    print(tableHeaders, results)
     return render_template("index.html", tableHeaders=tableHeaders, results=results, timeElapsed=timeElapsed)
-    # return {"headers":tableHeaders, "results": results, "timeElapsed": timeElapsed}
 
-
-@app.route("/updateQuery", methods=["POST", "GET"])
-def updateQuery():
-    global query
-    global database
-
-    data = request.get_json()
-    query = data['query']
-    database = data['database']
-    print("[INFO]\t\t=====Database : ", database, file=sys.stderr)
-    print("[INFO]\t\t=====Query : ", query, file=sys.stderr)
-    return {"status": True}
-
-    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
