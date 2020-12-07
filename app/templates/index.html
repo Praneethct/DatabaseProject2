@@ -92,6 +92,7 @@
         if (record == true){
             recognition.start();
             document.getElementById("query_box").value = "";
+            mic.src = "../static/mic-animate.gif"
             record = false;
         }
         else{
@@ -119,7 +120,7 @@
 
         <hr>
 
-        <button id="start_button" onclick="startButton(event)"><img id="start_img" src="../static/mic.gif" alt="Start"></button> 
+        <button id="start_button" onclick="startButton(event)"><img id="mic" src="../static/mic.gif" alt="Start"></button> 
         
         <form action="/execute" method="post">
 
