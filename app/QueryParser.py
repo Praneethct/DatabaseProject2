@@ -44,11 +44,12 @@ class QueryParser():
         while column < len(columns):
             if columns[column] in specialCharacters:
                 cleanedCols.append(specialCharacters[columns[column]])
-                if (columns[column] == "greater" or columns[column] == "less") and columns[column] == "than":
+                if (columns[column] == "greater" or columns[column] == "less") and columns[column+1] == "than":
                     column += 1
             else:
                 cleanedCols.append(columns[column])
             column += 1
+        print("handle special characters: ", cleanedCols)
         return cleanedCols
 
     
