@@ -148,7 +148,8 @@ class QueryParser():
                     "having": ["(?<=having)\s+[\w\. ]+(?=(\s*$))"]
                 },
 
-                "functions": set(["count", "sum", "min", "max", "avg"]) 
+                "functions": set(["count", "sum", "min", "max", "avg"]),
+                "stripChars": set(["'", '"', ",", ";", " "])
 
         }
 
@@ -168,7 +169,10 @@ class QueryParser():
         
         for item in parsed_items:
             cleanedItem = parsed_items[item].strip().split(" ")
-            cleanedItem = list(map(lambda x: x.strip().strip(",").strip(), cleanedItem))
+            stripChars = self.getMappings("stripChars")
+            for char in stripChars:
+                cleanedItem = list(map(lambda x: x.strip(char), cleanedItem))
+            cleanedItem = list(filter(lambda x: x != '', cleanedItem))
             cleanedItem = self.handleConnectingCharacters(cleanedItem, self.getMappings("connectingCharacters"))
             
             if item in columnType:
