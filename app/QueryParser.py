@@ -40,11 +40,15 @@ class QueryParser():
     def handleSpecialCharacters(self, columns, specialCharacters): 
         
         cleanedCols = []
-        for column in columns:
-            if column in specialCharacters:
-                cleanedCols.append(specialCharacters[column])
+        column = 0
+        while column < len(columns):
+            if columns[column] in specialCharacters:
+                cleanedCols.append(specialCharacters[columns[column]])
+                if (columns[column] == "greater" or columns[column] == "smaller") and columns[column] == "than":
+                    column += 1
             else:
-                cleanedCols.append(column)
+                cleanedCols.append(columns[column])
+            column += 1
         return cleanedCols
 
     
@@ -123,7 +127,8 @@ class QueryParser():
                     "not": "!",
                     "or": "OR",
                     "greater": ">",
-                    "smaller": "<"
+                    "less": "<",
+                    "percentile": "%"
                 },
 
                 "spaceMappings": {
@@ -160,7 +165,8 @@ class QueryParser():
         columnType = set(["select", "group by", "order by"])
         
         for item in parsed_items:
-            cleanedItem = parsed_items[item].strip().split(" ") 
+            cleanedItem = parsed_items[item].strip().split(" ")
+            cleanedItem = list(map(lambda x: x.strip().strip(",").strip(), cleanedItem))
             cleanedItem = self.handleConnectingCharacters(cleanedItem, self.getMappings("connectingCharacters"))
             
             if item in columnType:
