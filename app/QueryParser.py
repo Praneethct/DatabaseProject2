@@ -64,7 +64,7 @@ class QueryParser():
 
     def handleStringValues(self, cleanedItem):
         
-        operators = set(["!", "=", ">", "<"])
+        operators = set(["!", "=", ">", "<", "like"])
         item = 0
 
         while item < len(cleanedItem):
@@ -129,7 +129,8 @@ class QueryParser():
                     "or": "OR",
                     "greater": ">",
                     "less": "<",
-                    "percentile": "%"
+                    "percentile": "%",
+                    "like": "like"
                 },
 
                 "spaceMappings": {
