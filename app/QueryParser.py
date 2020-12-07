@@ -156,7 +156,7 @@ class QueryParser():
                     "maximum": "MAX",
                     "average": "AVG",
                     "count": "COUNT"
-                }
+                },
                 "stripChars": set(["'", '"', ",", ";", " "])
 
         }
