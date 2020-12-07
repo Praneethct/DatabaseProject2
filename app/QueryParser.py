@@ -151,7 +151,7 @@ class QueryParser():
                 "functions": {
                     "sum": "SUM",
                     "minimum": "MIN",
-                    "min": "MIN"
+                    "min": "MIN",
                     "max": "MAX",
                     "maximum": "MAX",
                     "average": "AVG",
