@@ -88,7 +88,7 @@ class QueryParser():
         while column < len(columns):
             if columns[column] in functions:
                 n = column+2 if columns[column+1] == "of" else column+1
-                columns[n] = columns[column].upper()+"("+columns[n]+")"
+                columns[n] = functions[columns[column]]+"("+columns[n]+")"
                 column = n
             tempCleanedCols.append(columns[column])
             column += 1
@@ -148,7 +148,15 @@ class QueryParser():
                     "having": ["(?<=having)\s+[\w\. ]+(?=(\s*$))"]
                 },
 
-                "functions": set(["count", "sum", "minimum", "maximum", "average"]),
+                "functions": {
+                    "sum": "SUM",
+                    "minimum": "MIN",
+                    "min": "MIN"
+                    "max": "MAX",
+                    "maximum": "MAX",
+                    "average": "AVG",
+                    "count": "COUNT"
+                }
                 "stripChars": set(["'", '"', ",", ";", " "])
 
         }
