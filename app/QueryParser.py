@@ -148,7 +148,7 @@ class QueryParser():
                     "having": ["(?<=having)\s+[\w\. ]+(?=(\s*$))"]
                 },
 
-                "functions": set(["count", "sum", "min", "max", "avg"]),
+                "functions": set(["count", "sum", "minimum", "maximum", "average"]),
                 "stripChars": set(["'", '"', ",", ";", " "])
 
         }
