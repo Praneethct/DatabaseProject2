@@ -1,3 +1,4 @@
+set -xe
 
 clone_repo() {
     echo -n     "Enter Github Username: "
