@@ -43,7 +43,7 @@ regex = {
         "X": "(?<=where is).*"
     },
     "find location": {
-        "X": "(?<=find location).*"
+        "X": "(?<=find location of).*"
     },
     "in which": {
         "X": "(?<=is).*",
@@ -80,7 +80,7 @@ def extractVars(query):
 
 
 def cleanQuery(query):
-    stopwords = set(["the", "of", "with", "a", "an"])
+    stopwords = set(["the", "with", "a", "an"])
     pluraltosingular = {"aisles" : "aisle", "products" : "product", "departments" : "department", "orders" : "order"}
     query = " ".join(map(lambda x: pluraltosingular[x] if x in pluraltosingular else x, query.split(" ")))
     print("Singular Plural to : ", query)
@@ -151,5 +151,5 @@ List of working queries:
 '''
 
 # print(cleanQuery(query))
-
+# print(getQuery("find the location of coke"))
 # inner join Xs as a on p.X_id = a.X_id where X = 'Y' 
