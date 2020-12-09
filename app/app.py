@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 from dbconnection import executeQuery
-from QueryParser import QueryParser
+# from QueryParser import QueryParser
+from Parser import getQuery
 
 
 app = Flask(__name__)
@@ -13,9 +14,11 @@ def mainPage():
 def execute():
     print((request.form["dbType"], request.form["query"]))
     query = request.form["query"].strip().strip('\n').strip('\r').strip('\r\n')
-    parser = QueryParser.getInstance()
+    # parser = QueryParser.getInstance()
+    query = getQuery(query)
+    print("Got query: ", query)
     try:
-        tableHeaders, results, timeElapsed = executeQuery(parser.handle(query), request.form["dbType"], request.form["dbName"])
+        tableHeaders, results, timeElapsed = executeQuery(query, request.form["dbType"], request.form["dbName"])
     except:
         return render_template("index.html")
     print(tableHeaders, results)
