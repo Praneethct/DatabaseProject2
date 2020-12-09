@@ -36,7 +36,7 @@ regex = {
         "X": "(?<=product that starts).*"
     },
     "in": {
-        "X": "(?<=in).*(?=of)",
+        "X": "(?<=in).*\s+(?=of )",
         "Y": "(?<=of).*"
     },
     "where is": {
@@ -151,5 +151,5 @@ List of working queries:
 '''
 
 # print(cleanQuery(query))
-print(getQuery("find all products from soft drinks"))
+print(getQuery("find the top 10 most popular products in the aisle of soft drinks"))
 # inner join Xs as a on p.X_id = a.X_id where X = 'Y' 
