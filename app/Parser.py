@@ -12,7 +12,7 @@ queryAbstract = {
     "least product": "select Y from products as p inner join Ys as a on p.Y_id = a.Y_id group by p.Y_id order by count(p.Y_id) asc limit L;",
     "product starting": "select product_name from products where product_name like 'X%'",
     "product starting": "select product_name from products where product_name like 'X%'",
-    "all product from": "select product_name from product as p inner join aisles as a on p.aisle_id = a.aisle_id where aisle = 'X'",
+    "all product from": "select product_name from products as p inner join aisles as a on p.aisle_id = a.aisle_id where aisle = 'X'",
     "in": "inner join Xs as a on p.X_id = a.X_id where X = 'Y'"
 }
 
@@ -46,7 +46,7 @@ regex = {
         "X": "(?<=find location of).*"
     },
     "in which": {
-        "X": "(?<=is).*",
+        "X": "(?<=is)\s+.*",
         "Y": "(?<=in which).*(?=is)"
     },
     "most product": {
@@ -151,5 +151,5 @@ List of working queries:
 '''
 
 # print(cleanQuery(query))
-# print(getQuery("find the location of coke"))
+print(getQuery("find all products from soft drinks"))
 # inner join Xs as a on p.X_id = a.X_id where X = 'Y' 
