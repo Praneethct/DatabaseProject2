@@ -151,5 +151,5 @@ List of working queries:
 '''
 
 # print(cleanQuery(query))
-print(getQuery("find the top 10 most popular products in the aisle of soft drinks"))
+# print(getQuery("find the top 10 departments with least products in the aisle of soft drinks"))
 # inner join Xs as a on p.X_id = a.X_id where X = 'Y' 
