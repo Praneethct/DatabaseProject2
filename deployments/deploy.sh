@@ -22,4 +22,4 @@ docker rm -f databaseproject2_alexa || echo "container not found"
 cd /home/ec2-user/DatabaseProject2 && git pull origin
 [[ `docker -v` ]] || install_docker
 docker build -t databaseflaskapp2_alexa app
-docker run --name databaseproject_alexa -p 5000:5000 -d databaseflaskapp2_alexa
+docker run --name databaseproject2_alexa -p 5000:5000 -d databaseflaskapp2_alexa
