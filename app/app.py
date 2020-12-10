@@ -35,7 +35,7 @@ def updateQuery():
     database = data['database']
     print("[INFO]\t\t=====Database : ", database, file=sys.stderr)
     print("[INFO]\t\t=====Query : ", query, file=sys.stderr)
-    return {"status": True}
+    return {"status": True, "message": "Query Executed Successfully"}
 
     
 if __name__ == "__main__":
