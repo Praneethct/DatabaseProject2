@@ -6,8 +6,8 @@ queryAbstract = {
     "find location": "select aisle from products as p inner join aisles as a on p.aisle_id = a.aisle_id where product_name = 'X';",
     "in which": "select Y from products as p inner join Ys as a on p.Y_id = a.Y_id where product_name = 'X';",
     "most popular product": "select product_name from order_products as op inner join products as p on op.product_id = p.product_id Q group by p.product_id order by count(p.product_id) desc limit L;",
-    "popular product": "select product_name from order_products as op inner join products as p on op.product_id = p.product_id Q group by p.product_id order by count(p.product_id) desc limit L;",
     "least popular product": "select product_name from order_products as op inner join products as p on op.product_id = p.product_id Q group by p.product_id order by count(p.product_id) asc limit L;",
+    "popular product": "select product_name from order_products as op inner join products as p on op.product_id = p.product_id Q group by p.product_id order by count(p.product_id) desc limit L;",
     "most product": "select Y from products as p inner join Ys as a on p.Y_id = a.Y_id group by p.Y_id order by count(p.Y_id) desc limit L;",
     "least product": "select Y from products as p inner join Ys as a on p.Y_id = a.Y_id group by p.Y_id order by count(p.Y_id) asc limit L;",
     "product starting": "select product_name from products where product_name like 'X%'",
@@ -151,5 +151,5 @@ List of working queries:
 '''
 
 # print(cleanQuery(query))
-# print(getQuery("find the top 10 departments with least products in the aisle of soft drinks"))
+# print(getQuery("find the least popular products"))
 # inner join Xs as a on p.X_id = a.X_id where X = 'Y' 
